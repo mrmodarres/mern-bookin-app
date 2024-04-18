@@ -19,3 +19,17 @@ export type SignInFormType = {
   email: string;
   password: string;
 };
+
+export type HotelFormType = {
+  name: string;
+  city: string;
+  country: string;
+  description: string;
+  type: string;
+  pricePerNight: number;
+  starRaiting: number;
+  facilities: string[];
+  imageFiles: FileList;
+  adultCount: number;
+  childCount: number;
+};
