@@ -18,22 +18,22 @@ const upload = multer({
 router.post(
   "/",
   verifyToken,
-  [
-    body("name").notEmpty().withMessage("Name is required"),
-    body("city").notEmpty().withMessage("City is required"),
-    body("country").notEmpty().withMessage("Country is required"),
-    body("decription").notEmpty().withMessage("Description is required"),
-    body("type").notEmpty().withMessage("Type is required"),
-    body("ficilites")
-      .notEmpty()
-      .isNumeric()
-      .isArray()
-      .withMessage("Ficilites is required"),
-    body("pricePerNight")
-      .notEmpty()
-      .isNumeric()
-      .withMessage("Price per night is required"),
-  ],
+  // [
+  //   body("name").notEmpty().withMessage("Name is required"),
+  //   body("city").notEmpty().withMessage("City is required"),
+  //   body("country").notEmpty().withMessage("Country is required"),
+  //   body("decription").notEmpty().withMessage("Description is required"),
+  //   body("type").notEmpty().withMessage("Type is required"),
+  //   body("ficilites")
+  //     .notEmpty()
+  //     .isNumeric()
+  //     .isArray()
+  //     .withMessage("Ficilites is required"),
+  //   body("pricePerNight")
+  //     .notEmpty()
+  //     .isNumeric()
+  //     .withMessage("Price per night is required"),
+  // ],
   upload.array("imageFiles", 6),
   async (req: Request, res: Response) => {
     try {
@@ -50,7 +50,9 @@ router.post(
       const imageUrls = await Promise.all(uploadPromises);
       newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
+
       newHotel.userId = req.userId;
+
       //   3. save the new hotel in our database
       const hotel = new Hotel(newHotel);
       await hotel.save();

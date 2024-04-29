@@ -33,6 +33,10 @@ app.use("/api/auth", userAuth);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
 
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
+
 app.listen(4000, () => {
   console.log("Server running at Port 4000");
 });

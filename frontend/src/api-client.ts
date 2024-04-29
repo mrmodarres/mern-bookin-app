@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RegisterFormData, SignInFormType } from "./tying";
+import { HotelFormType, RegisterFormData, SignInFormType } from "./tying";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const registerApi = async (formData: RegisterFormData) => {
@@ -46,4 +46,17 @@ export const signOut = async () => {
   if (response.status !== 200) {
     throw new Error("Somthing went wrong");
   }
+};
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+  const response = await axios(`${API_BASE_URL}/api/my-hotels`, {
+    method: "post",
+    withCredentials: true,
+    data: hotelFormData,
+  });
+  if (response.status !== 201) {
+    throw new Error("Failed to add hotel");
+  }
+
+  return response.data;
 };
