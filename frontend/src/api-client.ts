@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RegisterFormData, SignInFormType } from "./tying";
+import { HotelFormType, RegisterFormData, SignInFormType } from "./tying";
 import { HotelType } from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -71,5 +71,31 @@ export const getMyHotels = async (): Promise<HotelType[]> => {
     throw new Error("Error fetching hotels");
   }
 
+  return response.data;
+};
+
+export const getHotelById = async (hotelId: string): Promise<HotelType> => {
+  const response = await axios(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+    method: "get",
+    withCredentials: true,
+  });
+  if (response.status !== 200) {
+    throw new Error("Error fetching Hotels");
+  }
+  return response.data;
+};
+
+export const updateMyHotelById = async (hotelFormData: FormData) => {
+  const response = await axios(
+    `${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+    {
+      method: "put",
+      withCredentials: true,
+      data: hotelFormData,
+    }
+  );
+  if (response.status !== 201) {
+    throw new Error("Failes to update Hotel");
+  }
   return response.data;
 };

@@ -27,9 +27,10 @@ export type HotelFormType = {
   description: string;
   type: string;
   pricePerNight: number;
-  starRaiting: number;
+  starRating: number;
   facilities: string[];
   imageFiles: FileList;
+  imageUrls: string[];
   adultCount: number;
   childCount: number;
 };
