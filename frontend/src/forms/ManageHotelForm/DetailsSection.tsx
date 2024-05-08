@@ -8,7 +8,6 @@ function DetailsSection({ title }: Props) {
   const {
     register,
     formState: { errors },
-    watch,
   } = useFormContext<HotelFormType>();
 
   return (

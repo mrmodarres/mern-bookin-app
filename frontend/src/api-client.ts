@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HotelFormType, RegisterFormData, SignInFormType } from "./tying";
+import { RegisterFormData, SignInFormType } from "./tying";
 import { HotelType } from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
