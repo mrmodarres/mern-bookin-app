@@ -95,7 +95,7 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
     }
   );
   if (response.status !== 201) {
-    throw new Error("Failes to update Hotel");
+    throw new Error("Failed to update Hotel");
   }
   return response.data;
 };

@@ -12,9 +12,15 @@ type Props = {
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
   hotel?: HotelType;
+  title?: string;
 };
 
-function ManageHotelForm({ onSave, isLoading, hotel }: Props) {
+function ManageHotelForm({
+  onSave,
+  isLoading,
+  hotel,
+  title = "Add Hotel",
+}: Props) {
   const formMethods = useForm<HotelFormType>();
   const { handleSubmit, reset } = formMethods;
   useEffect(() => {
@@ -53,7 +59,7 @@ function ManageHotelForm({ onSave, isLoading, hotel }: Props) {
   return (
     <FormProvider {...formMethods}>
       <form className="flex flex-col gap-10" onSubmit={onSubmit}>
-        <DetailsSection />
+        <DetailsSection title={title} />
         <TypeSection />
         <FacilitiesSection />
         <GuestsSection />

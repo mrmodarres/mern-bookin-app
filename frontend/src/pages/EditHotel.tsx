@@ -28,7 +28,12 @@ function EditHotel() {
   };
 
   return (
-    <ManageHotelForm isLoading={isLoading} hotel={hotel} onSave={handleSave} />
+    <ManageHotelForm
+      title="Edit Hotel"
+      isLoading={isLoading}
+      hotel={hotel}
+      onSave={handleSave}
+    />
   );
 }
 

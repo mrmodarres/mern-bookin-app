@@ -101,7 +101,7 @@ router.put(
       );
 
       if (!hotel) {
-        return res.status(400).json({ message: "Hotel not found" });
+        return res.status(404).json({ message: "Hotel not found" });
       }
       const files = req.files as Express.Multer.File[];
       const updatedImageUrls = await uploadImages(files);
