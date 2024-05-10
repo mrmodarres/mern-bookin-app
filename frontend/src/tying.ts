@@ -34,3 +34,23 @@ export type HotelFormType = {
   adultCount: number;
   childCount: number;
 };
+
+export type SearchContextType = {
+  destination: string;
+  checkIn: string;
+  checkOut: string;
+  adultCount: number;
+  childCount: number;
+  hotelId: string;
+  saveSearchValues: (
+    destination: string,
+    checkIn: string,
+    checkOut: string,
+    audltCount: number,
+    childCount: number,
+    hotelId?: string
+  ) => void;
+};
+export type SearchContextProviderProps = {
+  children: React.ReactNode;
+};
