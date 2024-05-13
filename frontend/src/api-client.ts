@@ -1,6 +1,6 @@
 import axios from "axios";
-import { RegisterFormData, SignInFormType } from "./tying";
-import { HotelType } from "../../backend/src/shared/types";
+import { RegisterFormData, SearchParams, SignInFormType } from "./tying";
+import { HotelSearchResponse, HotelType } from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const registerApi = async (formData: RegisterFormData) => {
@@ -97,5 +97,19 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
   if (response.status !== 201) {
     throw new Error("Failed to update Hotel");
   }
+  return response.data;
+};
+
+export const searchHotels = async (
+  searchParams: SearchParams
+): Promise<HotelSearchResponse> => {
+  const response = await axios(`${API_BASE_URL}/api/hotels/search`, {
+    method: "get",
+    params: searchParams,
+  });
+  if (response.status !== 200) {
+    throw new Error("Failed to search hotels");
+  }
+
   return response.data;
 };

@@ -54,3 +54,12 @@ export type SearchContextType = {
 export type SearchContextProviderProps = {
   children: React.ReactNode;
 };
+
+export type SearchParams = {
+  destination: string;
+  checkIn: string;
+  checkOut: string;
+  adultCount: number;
+  childCount: number;
+  page: string;
+};
