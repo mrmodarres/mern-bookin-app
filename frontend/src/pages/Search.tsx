@@ -6,7 +6,7 @@ import SearchResultCard from "../components/SearchResultCard";
 import { HotelType } from "../../../backend/src/shared/types";
 import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
-import HotelTypesFilter from "../components/HoteltypesFilter";
+import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
 function Search() {
