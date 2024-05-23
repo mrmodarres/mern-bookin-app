@@ -56,10 +56,21 @@ export type SearchContextProviderProps = {
 };
 
 export type SearchParams = {
-  destination: string;
-  checkIn: string;
-  checkOut: string;
-  adultCount: number;
-  childCount: number;
-  page: string;
+  destination?: string;
+  checkIn?: string;
+  checkOut?: string;
+  adultCount?: number;
+  childCount?: number;
+  page?: string;
+  facilities?: string[];
+  types?: string[];
+  stars?: string[];
+  maxPrice?: string;
+  sortOption?: string;
+};
+
+export type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  handlePageChange: (page: number) => void;
 };

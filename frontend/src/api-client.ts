@@ -106,6 +106,24 @@ export const searchHotels = async (
   const response = await axios(`${API_BASE_URL}/api/hotels/search`, {
     method: "get",
     params: searchParams,
+    paramsSerializer: (params) => {
+      const parts = [];
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          const value = params[key];
+          if (Array.isArray(value)) {
+            value.forEach((val) => {
+              parts.push(
+                `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
+              );
+            });
+          } else {
+            parts.push(`${encodeURIComponent(key)}=${value}`);
+          }
+        }
+      }
+      return parts.join("&");
+    },
   });
   if (response.status !== 200) {
     throw new Error("Failed to search hotels");
