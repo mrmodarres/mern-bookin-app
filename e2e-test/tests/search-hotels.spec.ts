@@ -26,3 +26,12 @@ test("SHould show hotel search result", async ({ page }) => {
   await expect(page.getByText("Hotels found in iran")).toBeVisible();
   await expect(page.getByText("نهله بنی احمدی")).toBeVisible();
 });
+
+test("Should show Hotel detail", async ({ page }) => {
+  await page.goto(UI_URL);
+  await page.getByPlaceholder("Where you to?").fill("iran");
+  await page.getByRole("button", { name: "Search" }).click();
+  await page.getByText("نهله بنی احمدی").click();
+  await expect(page).toHaveURL(/detail/);
+  await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
+});
