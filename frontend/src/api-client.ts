@@ -1,7 +1,27 @@
 import axios from "axios";
-import { RegisterFormData, SearchParams, SignInFormType } from "./tying";
-import { HotelSearchResponse, HotelType } from "../../backend/src/shared/types";
+import {
+  BookingFormData,
+  RegisterFormData,
+  SearchParams,
+  SignInFormType,
+} from "./tying";
+import {
+  HotelSearchResponse,
+  HotelType,
+  PaymentIntentResponse,
+  UserType,
+} from "../../backend/src/shared/types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
+export const getCurrentUser = async (): Promise<UserType> => {
+  const response = await axios(`${API_BASE_URL}/api/users/me`, {
+    withCredentials: true,
+  });
+  if (response.status !== 200) {
+    throw new Error("Error fetching user");
+  }
+  return response.data;
+};
 
 export const registerApi = async (formData: RegisterFormData) => {
   const request = await axios(`${API_BASE_URL}/api/users/register`, {
@@ -133,13 +153,48 @@ export const searchHotels = async (
 };
 
 export const getHotelDetailById = async (
-  hoteelId: string
+  hotelId: string
 ): Promise<HotelType> => {
-  const response = await axios(`${API_BASE_URL}/api/hotels/${hoteelId}`, {
+  const response = await axios(`${API_BASE_URL}/api/hotels/${hotelId}`, {
     method: "get",
   });
   if (response.status !== 200) {
     throw new Error("Error fetching Hotels");
   }
   return response.data;
+};
+
+export const createPaymentIntent = async (
+  hotelId: string,
+  numberOfNights: string
+): Promise<PaymentIntentResponse> => {
+  const response = await axios(
+    `${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
+    {
+      withCredentials: true,
+      method: "post",
+      data: {
+        numberOfNights,
+      },
+    }
+  );
+  if (response.status !== 200) {
+    throw new Error("Error fetching payment intent");
+  }
+  return response.data;
+};
+
+export const createRoomBooking = async (formData: BookingFormData) => {
+  const response = await axios(
+    `${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`,
+    {
+      method: "post",
+      data: formData,
+      withCredentials: true,
+    }
+  );
+  console.log(response);
+  if (response.status !== 200) {
+    throw new Error("Error booking room");
+  }
 };

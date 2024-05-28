@@ -6,12 +6,24 @@ const SearchContext = React.createContext<SearchContextType | undefined>(
 );
 
 export const SearchProvider = ({ children }: SearchContextProviderProps) => {
-  const [destination, setDestination] = useState<string>("");
-  const [checkIn, setCheckIn] = useState<string>(new Date().toISOString());
-  const [checkOut, setCheckOut] = useState<string>(new Date().toISOString());
-  const [adultCount, setAdultCount] = useState<number>(1);
-  const [childCount, setChildCount] = useState<number>(0);
-  const [hotelId, setHotelId] = useState<string>("");
+  const [destination, setDestination] = useState<string>(
+    () => sessionStorage.getItem("destination") || ""
+  );
+  const [checkIn, setCheckIn] = useState<string>(() =>
+    new Date(sessionStorage.getItem("checkIn") || new Date()).toISOString()
+  );
+  const [checkOut, setCheckOut] = useState<string>(() =>
+    new Date(sessionStorage.getItem("checkOut") || new Date()).toISOString()
+  );
+  const [adultCount, setAdultCount] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("adultCount") || "1")
+  );
+  const [childCount, setChildCount] = useState<number>(() =>
+    parseInt(sessionStorage.getItem("childCount") || "0")
+  );
+  const [hotelId, setHotelId] = useState<string>(
+    () => sessionStorage.getItem("hotelId") || ""
+  );
   const saveSearchValues = (
     destination: string,
     checkIn: string,
@@ -27,7 +39,13 @@ export const SearchProvider = ({ children }: SearchContextProviderProps) => {
     setChildCount(childCount);
     if (hotelId) {
       setHotelId(hotelId);
+      sessionStorage.setItem("hotelId", hotelId);
     }
+    sessionStorage.setItem("destination", destination);
+    sessionStorage.setItem("checkIn", checkIn);
+    sessionStorage.setItem("checkOut", checkOut);
+    sessionStorage.setItem("adultCount", adultCount.toString());
+    sessionStorage.setItem("childCount", childCount.toString());
   };
   return (
     <SearchContext.Provider

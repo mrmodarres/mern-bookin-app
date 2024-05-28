@@ -69,6 +69,19 @@ export type SearchParams = {
   sortOption?: string;
 };
 
+export type BookingFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  adultCount: number;
+  childCount: number;
+  checkIn: string;
+  checkOut: string;
+  hotelId: string;
+  paymentIntentId: string;
+  totalCost: number;
+};
+
 export type PaginationProps = {
   currentPage: number;
   totalPages: number;
